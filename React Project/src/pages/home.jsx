@@ -1,5 +1,5 @@
-import Halal from "../components/palal"
-import Popular from "../components/popular"
+import Halal from "../components/Halal"
+import Popular from "../components/Popular"
 
 
 import React from 'react'
