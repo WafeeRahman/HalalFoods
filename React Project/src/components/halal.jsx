@@ -1,11 +1,11 @@
 import React from 'react'
 
-function halal() {
-  return (
-    <div>
-      awesome sauce
-    </div>
-  )
+function Halal() {
+    return (
+        <div>
+            <h1>goat</h1>
+        </div>
+    )
 }
 
-export default halal
+export default Halal

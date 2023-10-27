@@ -1,11 +1,11 @@
 import React from 'react'
 
-function popular() {
+function Popular() {
   return (
-    <div>
-      whats good
-    </div>
+    <>
+    <h1>Awesome!</h1>
+    </>
   )
 }
 
-export default popular
+export default Popular

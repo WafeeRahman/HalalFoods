@@ -1,16 +1,16 @@
-import halal from "../components/halal"
-import popular from "../components/popular"
+import Halal from "../components/palal"
+import Popular from "../components/popular"
 
 
 import React from 'react'
 
-function home() {
-  return (
-    <div>
-      <halal />
-      <popular />
-    </div>
-  )
+function Home() {
+    return (
+        <div>
+            <Halal />
+            <Popular />
+        </div>
+    )
 }
 
-export default home
+export default Home
