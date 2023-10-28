@@ -7,7 +7,7 @@ import React from 'react'
 function Home() {
     return (
         <div>
-            <Halal />
+            <Halal/>
             <Popular />
         </div>
     )

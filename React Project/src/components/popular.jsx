@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/splide/dist/css/splide.min.css'
 import { Gradient, Card, Wrapper } from './Wrappers.jsx'
-
+import { v4 as uuid } from 'uuid';
 function Popular() {
   // React State for Setting Popular Recipes Array
   const [popular, setPopular] = useState([]);
 
-  const exclude = "pork,gelatin,wine,alcohol,pork,bacon,ham,lard,blood,diglyceride,glycerol,hormones,magnesium stearate,stearic acid,mono glyceride,monoglyceride,rennin,pepsin,shortening,vanilla extract,vitamins,whey"
-
-
+ 
   useEffect(() => {
     getPopular();
   }, []);
@@ -23,14 +21,15 @@ function Popular() {
 
     //If local storage is empty do another fetch request
     else {
-      const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${import.meta.env.VITE_REACT_APP_API_KEY}&excludeIngredients=${exclude}&type=dessert&number=9`);
+      const api = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&app_id=${import.meta.env.VITE_REACT_APP_ID}&app_key=${import.meta.env.VITE_REACT_APP_API_KEY}&health=alcohol-free&health=pork-free&excluded=pork&excluded=gelatin&excluded=wine&excluded=alcohol&excluded=bacon&excluded=ham&excluded=lard&excluded=blood&excluded=diglyceride&excluded=glycerol&excluded=hormones&excluded=magnesium%20stearate&excluded=stearic%20acid&excluded=mono%20glyceride&excluded=monoglyceride&excluded=rennin&excluded=pepsin&excluded=shortening&excluded=vanilla%20extract&excluded=vitamins&excluded=whey&random=true`)
+
 
 
       const data = await api.json(); //Take Api Response and Parse to JSON
 
-
-      localStorage.setItem("popular", JSON.stringify(data.recipes)); //Setpopular in local storage
-      setPopular(data.recipes); //Set popular array state to copy recipe array
+      console.log(data);
+      localStorage.setItem("popular", JSON.stringify(data.hits)); //Setpopular in local storage
+      setPopular(data.hits); //Set popular array state to copy recipe array
 
     }
 
@@ -42,24 +41,26 @@ function Popular() {
     //For Each Recipe in Popular Recipe, Place a Card with Details within a Wrapper Div
     // Wrap Each Card in a Slide
     <div>
+
       <Wrapper>
-        <h2>Desserts For You</h2>
+        <h3>For You</h3>
 
         <Splide options={{
-          perPage: 4,
+          perPage: 5,
           arrows: false,
           pagination: false,
           drag: 'free',
           gap: '5rem',
         }}>
           {
-            popular.map((recipe) => {
+            popular.map((hit) => {
               return (
-                <SplideSlide key={recipe.id}>
+                <SplideSlide key={uuid()}>
+                  <a href=""></a>
                   <Card>
 
-                    <h5>{recipe.title}</h5>
-                    <img src={recipe.image} alt={recipe.title} />
+                    <h5><a href={hit.recipe.url}>{hit.recipe.label}</a></h5>
+                    <img src={hit.recipe.image} alt={hit.recipe.label} />
                     <Gradient></Gradient>
                   </Card>
                 </SplideSlide>

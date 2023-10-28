@@ -4,7 +4,17 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
+a {
 
+  color:white;
+  text-decoration: none;
+  
+}
+
+a:hover {
+  color: lightsteelblue;
+  transition: 0.5s;
+}
 
 
 body {
@@ -15,7 +25,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #D5F3E5;
+  margin: 0% 5%;
 }
+
+h4 {
+  font-size: 1rem;
+  color: rgb(58, 55, 55);
+}
+
+h3 {
+  font: 1.5rem;
+  color: rgb(58, 55, 55);
+  line-height: 2.5rem;
+  margin: 2rem 0rem;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
