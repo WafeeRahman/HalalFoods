@@ -3,6 +3,8 @@ import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/splide/dist/css/splide.min.css'
 import { Gradient, Card, Wrapper } from './Wrappers.jsx'
 import { v4 as uuid } from 'uuid';
+import {FaMagnifyingGlass} from 'react-icons/fa6';
+
 function Popular() {
   // React State for Setting Popular Recipes Array
   const [popular, setPopular] = useState([]);
@@ -59,8 +61,8 @@ function Popular() {
                   <a href=""></a>
                   <Card>
 
-                    <h5><a href={hit.recipe.url}>{hit.recipe.label}</a></h5>
-                    <img src={hit.recipe.image} alt={hit.recipe.label} />
+                  <h5>{hit.recipe.label}<a href={hit.recipe.url}><FaMagnifyingGlass></FaMagnifyingGlass></a></h5>
+                    <img src={hit.recipe.images.REGULAR.url} alt={hit.recipe.label} />
                     <Gradient></Gradient>
                   </Card>
                 </SplideSlide>

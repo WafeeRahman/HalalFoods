@@ -3,6 +3,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/splide/dist/css/splide.min.css'
 import { Gradient, Wrapper } from './Wrappers.jsx'
 import styled from 'styled-components';
+import {FaMagnifyingGlass} from 'react-icons/fa6';
 import { v4 as uuid } from 'uuid';
 function Halal() {
 
@@ -40,7 +41,7 @@ function Halal() {
     return (
         <div>
             <Wrapper>
-                <h3>Halal Dinner Ideas</h3>
+                <h3>Dinner Ideas</h3>
 
                 <Splide options={{
                     perPage: 4,
@@ -55,7 +56,7 @@ function Halal() {
                                 <SplideSlide key={uuid()}>
                                     <Card>
 
-                                        <h5><a href={hit.recipe.url}>{hit.recipe.label}</a></h5>
+                                        <h5>{hit.recipe.label}<a href={hit.recipe.url}><FaMagnifyingGlass></FaMagnifyingGlass></a></h5>
                                         <img src={hit.recipe.images.REGULAR.url} alt={hit.recipe.label} />
                                         <Gradient></Gradient>
                                     </Card>
@@ -106,6 +107,27 @@ h5{
   justify-content: center;
   align-items: center;
 }
+a {
+    position:absolute;
+    z-index: 10;
+    left: 50%;
+    bottom: 0%;
+    transform: translate(-10%,-10%);
+    color: white;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1rem;
+    height: 40%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  a:hover {
+    color: lightsteelblue;
+    transition: 0.5s;
+  }
 `;
 
 

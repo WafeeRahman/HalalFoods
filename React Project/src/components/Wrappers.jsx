@@ -39,6 +39,28 @@ h5{
   justify-content: center;
   align-items: center;
 }
+a{
+    position:absolute;
+    z-index: 10;
+    left: 50%;
+    bottom: 0%;
+    transform: translate(-10%,-10%);
+    color: white;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1rem;
+    height: 40%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+a:hover {
+    color: lightsteelblue;
+    transition: 0.5s;
+  }
+
 `;
 
 export const Gradient = styled.div`
