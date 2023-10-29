@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const Container = styled.div`
   display: flex;
@@ -64,23 +67,55 @@ const Button = styled.button`
 `;
 
 function Login() {
-    return (
-        <Container>
-            <Card
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ type: 'spring', damping: 10, stiffness: 100 }}
-            >
-                <Title>Login</Title>
-                <Label htmlFor="username">Username</Label>
-                <Input type="text" id="username" placeholder="Username" />
-                <Label htmlFor="password">Password</Label>
-                <Input type="password" id="password" placeholder="Password" />
-                <Button>Log In</Button>
-            </Card>
-        </Container>
-    );
+
+  const [values, setValues] = useState({
+    name: '',
+    password: ''
+  })
+
+  const navigate = useNavigate();
+
+  const handleInput = (event) => {
+    setValues(prev => ({ ...prev, [event.target.name]: [event.target.value] }))
+  }
+
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    axios.post('http://localhost:3000/login', values)
+      .then(res => {
+        if(res.data.Login) {
+          navigate('/')
+        }
+        else {
+          alert("Login Failed")
+        }
+        console.log(res);
+        
+        
+      })
+      .catch(err => console.log(err));
+  }
+
+
+  return (
+    <Container>
+      <form onSubmit={handleSubmit}>
+        <Card
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ type: 'spring', damping: 10, stiffness: 100 }}
+        >
+          <Title>Login</Title>
+          <Label htmlFor="username">Username</Label>
+          <Input type="text" id="username" placeholder="Username" name="username" onChange={handleInput} />
+          <Label htmlFor="password">Password</Label>
+          <Input type="password" id="password" placeholder="Password" name="password" onChange={handleInput} />
+          <Button>Log In</Button>
+        </Card>
+      </form>
+    </Container>
+  );
 }
 
 export default Login;

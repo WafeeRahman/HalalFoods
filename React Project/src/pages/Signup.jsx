@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -64,25 +65,52 @@ const Button = styled.button`
 `;
 
 function Signup() {
-    return (
-        <Container>
-            <Card
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ type: 'spring', damping: 10, stiffness: 100 }}
-            >
-                <Title>Sign Up</Title>
-                <Label htmlFor="username">Username</Label>
-                <Input type="text" id="username" placeholder="Username" />
-                <Label htmlFor="email">Email</Label>
-                <Input type="email" id="email" placeholder="Email" />
-                <Label htmlFor="password">Password</Label>
-                <Input type="password" id="password" placeholder="Password" />
-                <Button>Sign Up</Button>
-            </Card>
-        </Container>
-    );
+
+  const [values, setValues] = useState({
+    name: '',
+    email: '',
+    password: ''
+  })
+
+  const navigate = useNavigate();
+
+  const handleInput = (event) => {
+    setValues(prev => ({...prev, [event.target.name]: [event.target.value] }))
+  }
+
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    axios.post('http://localhost:3000/signup', values)
+      .then(res => {
+        console.log(res);
+        navigate('/login')
+      })
+      .catch(err => console.log(err));
+  }
+
+  return (
+    <Container>
+
+
+      <form onSubmit={handleSubmit}>
+        <Card
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ type: 'spring', damping: 10, stiffness: 100 }}
+        >
+          <Title>Sign Up</Title>
+          <Label htmlFor="username">Username</Label>
+          <Input onChange={handleInput} type="text" id="username" placeholder="Username" name="name" />
+          <Label htmlFor="email">Email</Label>
+          <Input onChange={handleInput} type="email" id="email" placeholder="Email" name="email" />
+          <Label htmlFor="password">Password</Label>
+          <Input onChange={handleInput} type="password" id="password" placeholder="Password" name="password" />
+          <Button>Sign Up</Button>
+        </Card>
+      </form>
+    </Container>
+  );
 }
 
 export default Signup;
