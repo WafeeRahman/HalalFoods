@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import { NavLink, useParams } from 'react-router-dom'
-import { v4 as uuid } from 'uuid';
+import { Link, useParams } from 'react-router-dom'
+import { FaMagnifyingGlass } from 'react-icons/fa6';
 function Cuisine() {
 
     const [cuisine, setCuisine] = useState([]);
     let params = useParams();
     const getCuisine = async (name) => {
         console.log(name);
-        const data = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&app_id=46c0246f&app_key=%20838808eb9dd36173e9c9ff6d69079ee9%09&health=alcohol-free&health=pork-free&cuisineType=${name}&excluded=pork&excluded=gelatin&excluded=wine&excluded=alcohol&excluded=bacon&excluded=ham&excluded=lard&excluded=blood&excluded=diglyceride&excluded=glycerol&excluded=hormones&excluded=magnesium%20stearate&excluded=stearic%20acid&excluded=mono%20glyceride&excluded=monoglyceride&excluded=rennin&excluded=pepsin&excluded=shortening&excluded=vanilla%20extract&excluded=vitamins&excluded=whey&random=true`)
+        const data = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&app_id=${import.meta.env.VITE_REACT_APP_ID}&app_key=${import.meta.env.VITE_REACT_APP_API_KEY}&health=alcohol-free&health=pork-free&cuisineType=${name}&excluded=pork&excluded=gelatin&excluded=wine&excluded=alcohol&excluded=bacon&excluded=ham&excluded=lard&excluded=blood&excluded=diglyceride&excluded=glycerol&excluded=hormones&excluded=magnesium%20stearate&excluded=stearic%20acid&excluded=mono%20glyceride&excluded=monoglyceride&excluded=rennin&excluded=pepsin&excluded=shortening&excluded=vanilla%20extract&excluded=vitamins&excluded=whey&random=true`)
         const recipes = await data.json();
         setCuisine(recipes.hits);
     };
@@ -21,11 +21,14 @@ function Cuisine() {
 
     return (
         <Grid>
+            
             {cuisine.map((item) => {
+                  let id = item._links.self.href.slice(38,70);
                 return (
-                    <Card key={uuid()}>
+                    <Card key={id}>
                         <img src={item.recipe.images.REGULAR.url} alt="" />
-                        <h4>{item.recipe.label}</h4>
+                        <h4>{item.recipe.label}<Link to={'/recipe/' +id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h4>
+
                     </Card>
                 )
             })}
@@ -43,9 +46,24 @@ img {
     width: 100%;
     border-radius: 2rem;
 }
-a{
-    text-decoration: none;
-}
+a {
+    
+    color: white;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1rem;
+    height: 40%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(50%)
+  }
+  
+  a:hover {
+    color: lightsteelblue;
+    transition: 0.5s;
+  }
 h4 {
     text-align:center;
     padding: 1rem;

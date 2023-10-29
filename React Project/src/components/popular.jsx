@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/splide/dist/css/splide.min.css'
 import { Gradient, Card, Wrapper } from './Wrappers.jsx'
-import { v4 as uuid } from 'uuid';
-import {FaMagnifyingGlass} from 'react-icons/fa6';
-
+import { FaMagnifyingGlass } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
 function Popular() {
   // React State for Setting Popular Recipes Array
   const [popular, setPopular] = useState([]);
 
- 
+
   useEffect(() => {
     getPopular();
   }, []);
@@ -56,15 +55,20 @@ function Popular() {
         }}>
           {
             popular.map((hit) => {
+              let id = hit._links.self.href.slice(38,70);
               return (
-                <SplideSlide key={uuid()}>
-                  <a href=""></a>
+               
+                <SplideSlide key={id}>
+               
+              
                   <Card>
-
-                  <h5>{hit.recipe.label}<a href={hit.recipe.url}><FaMagnifyingGlass></FaMagnifyingGlass></a></h5>
-                    <img src={hit.recipe.images.REGULAR.url} alt={hit.recipe.label} />
-                    <Gradient></Gradient>
+                   
+                      <h5>{hit.recipe.label}<Link to={'/recipe/' +id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
+                      <img src={hit.recipe.images.REGULAR.url} alt={hit.recipe.label} />
+                      <Gradient></Gradient>
+                    
                   </Card>
+                  
                 </SplideSlide>
               );
             })

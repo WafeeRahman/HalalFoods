@@ -4,7 +4,7 @@ import '@splidejs/splide/dist/css/splide.min.css'
 import { Gradient, Wrapper } from './Wrappers.jsx'
 import styled from 'styled-components';
 import {FaMagnifyingGlass} from 'react-icons/fa6';
-import { v4 as uuid } from 'uuid';
+import { Link } from 'react-router-dom';
 function Halal() {
 
     // React State for Setting Popular Recipes Array
@@ -52,11 +52,12 @@ function Halal() {
                 }}>
                     {
                         halal.map((hit) => {
+                            let id = hit._links.self.href.slice(38,70);
                             return (
-                                <SplideSlide key={uuid()}>
+                                <SplideSlide key={id}>
                                     <Card>
 
-                                        <h5>{hit.recipe.label}<a href={hit.recipe.url}><FaMagnifyingGlass></FaMagnifyingGlass></a></h5>
+                                        <h5>{hit.recipe.label}<Link to={'/recipe/' +id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
                                         <img src={hit.recipe.images.REGULAR.url} alt={hit.recipe.label} />
                                         <Gradient></Gradient>
                                     </Card>

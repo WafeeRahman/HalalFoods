@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 //Styled Div For Each Item
 export const Wrapper = styled.div
-    `
+  `
   margin: 3rem 0rem 1rem 1rem;
 `;
 
 // Styles for Card
 export const Card = styled.div
-    `
+  `
 min-height: 20rem;
 max-width: 20rem;
 border-radius: 2rem;
@@ -60,6 +60,7 @@ a:hover {
     color: lightsteelblue;
     transition: 0.5s;
   }
+
 
 `;
 
