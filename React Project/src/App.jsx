@@ -1,14 +1,16 @@
 import React from 'react';
 import Pages from './pages/Pages';
 import Category from './components/Category';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useLocation } from 'react-router-dom';
 import Search from './components/Search';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { PiMosque } from 'react-icons/pi';
 import { motion } from 'framer-motion';
 
+
 function App() {
+
   const pageVariants = {
     initial: {
       y: '100%',
@@ -29,6 +31,7 @@ function App() {
     },
   };
 
+
   return (
     <motion.div
       initial="initial"
@@ -42,8 +45,6 @@ function App() {
             <PiMosque />
             <Logo to={'/'}>HalalFoods</Logo>
           </Nav>
-          <Search />
-          <Category />
           <Pages />
         </ContentContainer>
       </BrowserRouter>

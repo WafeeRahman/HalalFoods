@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { motion } from 'framer-motion'
 import { Link, useParams } from 'react-router-dom'
 import { FaMagnifyingGlass } from 'react-icons/fa6';
+import Search from "../components/Search"
+import Category from "../components/Category"
 function Cuisine() {
 
     const [cuisine, setCuisine] = useState([]);
@@ -20,26 +22,28 @@ function Cuisine() {
 
 
     return (
-        <Grid 
-        animate={{opacity: 1}}
-        initial={{opacity: 0}}
-        exit={{opacity: 0}}
-        transition={{duration:0.5}}>
-            
-            {cuisine.map((item) => {
-                  let id = item._links.self.href.slice(38,70);
-                return (
-                    <Card key={id}>
-                        <img src={item.recipe.images.REGULAR.url} alt="" />
-                        <h4>{item.recipe.label}<Link to={'/recipe/' +id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h4>
+        <>
+            <Grid
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}>
 
-                    </Card>
-                )
-            })}
-        </Grid>
+                {cuisine.map((item) => {
+                    let id = item._links.self.href.slice(38, 70);
+                    return (
+                        <Card key={id}>
+                            <img src={item.recipe.images.REGULAR.url} alt="" />
+                            <h4>{item.recipe.label}<Link to={'/recipe/' + id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h4>
+
+                        </Card>
+                    )
+                })}
+            </Grid>
+        </>
     )
 }
-const Grid = styled(motion.Grid)`
+const Grid = styled.div`
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 grid-gap: 3rem;

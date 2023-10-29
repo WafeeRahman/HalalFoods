@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,7 +24,10 @@ function Search() {
   };
 
   return (
-    <FormStyle onSubmit={submitHandler} expanded={expanded}>
+    <FormStyle
+      onSubmit={submitHandler}
+      $expanded={expanded ? true : undefined} // Use $ to pass only when true
+    >
       <div>
         <FaSearch />
         <input
@@ -41,8 +44,14 @@ function Search() {
 
 const FormStyle = styled.form`
   margin: 0rem auto;
-  max-width: ${(props) => (props.expanded ? '60%' : '40%')};
+  max-width: 40%;
   transition: max-width 0.5s;
+
+  ${(props) =>
+    props.$expanded &&
+    css`
+      max-width: 60%;
+    `}
 
   div {
     width: 100%;
