@@ -5,6 +5,7 @@ import { Gradient, Wrapper } from './Wrappers.jsx'
 import styled from 'styled-components';
 import {FaMagnifyingGlass} from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
+import Refresh from "./Refresh.jsx"
 function Halal() {
 
     // React State for Setting Popular Recipes Array
@@ -40,6 +41,7 @@ function Halal() {
 
     return (
         <div>
+           
             <Wrapper>
                 <h3>Dinner Ideas</h3>
 

@@ -29,7 +29,7 @@ function Recipe() {
                 <>
                     <div>
                         <h2>{details.recipe.label}</h2>
-                        <img src={details.recipe.images.REGULAR.url} alt="" />
+                        <Thumbnail src={details.recipe.images.REGULAR.url} alt="" />
 
                     </div>
                     <Info>
@@ -149,6 +149,12 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Subtle glow effect */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Enhanced glow on hover */
 }
 `;
+
+const Thumbnail = styled.img`
+
+border-radius:2rem;
+
+`
 
 
 export default Recipe

@@ -3,11 +3,13 @@ import { FaBowlRice } from 'react-icons/fa6';
 import { GiTacos, GiDonerKebab } from 'react-icons/gi';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import Refresh from './Refresh'
 
 import React from 'react'
 
 function Category() {
     return (
+        <>
         <List>
             <SLink to={'/cuisine/Asian'}>
                 <FaBowlRice></FaBowlRice>
@@ -26,6 +28,8 @@ function Category() {
                 <h4>South American</h4>
             </SLink>
         </List>
+        <Refresh></Refresh>
+        </>
     )
 }
 const List = styled.div`
