@@ -6,44 +6,67 @@ import { FaMagnifyingGlass } from 'react-icons/fa6';
 import Search from "../components/Search"
 import { IoFlagOutline } from 'react-icons/io5'
 import Category from "../components/Category"
-
+import axios from 'axios';
 function Cuisine() {
-    const [cuisine, setCuisine] = useState([]);
-    let params = useParams();
+  const [cuisine, setCuisine] = useState([]);
+  let params = useParams();
 
-    const getCuisine = async (name) => {
-        console.log(name);
-        const data = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&app_id=${import.meta.env.VITE_REACT_APP_ID}&app_key=${import.meta.env.VITE_REACT_APP_API_KEY}&health=alcohol-free&health=pork-free&cuisineType=${name}&excluded=pork&excluded=gelatin&excluded=wine&excluded=alcohol&excluded=bacon&excluded=ham&excluded=lard&excluded=blood&excluded=diglyceride&excluded=glycerol&excluded=hormones&excluded=magnesium%20stearate&excluded=stearic%20acid&excluded=mono%20glyceride&excluded=monoglyceride&excluded=rennin&excluded=pepsin&excluded=shortening&excluded=vanilla%20extract&excluded=vitamins&excluded=whey&random=true`)
-        const recipes = await data.json();
-        setCuisine(recipes.hits);
+  const getCuisine = async (name) => {
+    console.log(name);
+    const data = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&app_id=${import.meta.env.VITE_REACT_APP_ID}&app_key=${import.meta.env.VITE_REACT_APP_API_KEY}&health=alcohol-free&health=pork-free&cuisineType=${name}&excluded=pork&excluded=gelatin&excluded=wine&excluded=alcohol&excluded=bacon&excluded=ham&excluded=lard&excluded=blood&excluded=diglyceride&excluded=glycerol&excluded=hormones&excluded=magnesium%20stearate&excluded=stearic%20acid&excluded=mono%20glyceride&excluded=monoglyceride&excluded=rennin&excluded=pepsin&excluded=shortening&excluded=vanilla%20extract&excluded=vitamins&excluded=whey&random=true`)
+    const recipes = await data.json();
+    setCuisine(recipes.hits);
+  };
+
+  useEffect(() => {
+    getCuisine(params.type);
+  }, [params.type]);
+
+  const saveRecipe = (hit) => {
+    // Prepare the data as an object
+    const recipeData = {
+      recipeName: hit.recipe.label,
+      image: hit.recipe.images.REGULAR.url,
+      url: hit.recipe.url
     };
 
-    useEffect(() => {
-        getCuisine(params.type);
-    }, [params.type]);
+    // Make a POST request to your server to save the recipe using Axios
+    axios.post('http://localhost:3000/saved', { recipe: JSON.stringify(recipeData) })
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        if (data.success) {
+          alert('Recipe saved successfully');
+        } else {
+          alert('User Must Log In');
+        }
+      })
+      .catch((error) => {
+        alert('Error saving recipe:', error);
+      });
+  }
+  return (
+    <>
+      <Search />
+      <Category />
+      <Grid
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}>
+        {cuisine.map((item) => {
+          let id = item._links.self.href.slice(38, 70);
+          return (
+            <Card key={id}>
+              <img src={item.recipe.images.REGULAR.url} alt="" />
+              <h4>{item.recipe.label}<SaveIcon onClick={() => saveRecipe(item)}></SaveIcon><Link to={'/recipe/' + id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h4>
 
-    return (
-        <>
-            <Search />
-            <Category />
-            <Grid
-                animate={{ opacity: 1 }}
-                initial={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}>
-                {cuisine.map((item) => {
-                    let id = item._links.self.href.slice(38, 70);
-                    return (
-                        <Card key={id}>
-                            <img src={item.recipe.images.REGULAR.url} alt="" />
-                            <h4>{item.recipe.label} <SaveIcon /> <Link to={'/recipe/' + id}><FaMagnifyingGlass /></Link></h4>
-                            
-                        </Card>
-                    );
-                })}
-            </Grid>
-        </>
-    );
+            </Card>
+          );
+        })}
+      </Grid>
+    </>
+  );
 }
 
 const Grid = styled.div`
@@ -73,6 +96,10 @@ const Card = styled.div`
   h4 {
     text-align: center;
     padding: 1rem;
+  }
+  &:hover{
+    transform: scale(1.02);
+    transition: 0.5s
   }
 `;
 

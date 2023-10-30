@@ -3,9 +3,10 @@ import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/splide/dist/css/splide.min.css'
 import { Gradient, Wrapper } from './Wrappers.jsx'
 import styled from 'styled-components';
-import {FaMagnifyingGlass} from 'react-icons/fa6';
+import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { IoFlagOutline } from 'react-icons/io5'
+import axios from 'axios';
 function Halal() {
 
     // React State for Setting Popular Recipes Array
@@ -39,9 +40,33 @@ function Halal() {
 
     };
 
+    const saveRecipe = (hit) => {
+        // Prepare the data as an object
+        const recipeData = {
+            recipeName: hit.recipe.label,
+            image: hit.recipe.images.REGULAR.url,
+            url: hit.recipe.url
+        };
+
+        // Make a POST request to your server to save the recipe using Axios
+        axios.post('http://localhost:3000/saved', { recipe: JSON.stringify(recipeData) })
+            .then((response) => {
+                const data = response.data;
+                console.log(data);
+                if (data.success) {
+                    alert('Recipe saved successfully');
+                } else {
+                    alert('User Must Log In');
+                }
+            })
+            .catch((error) => {
+                alert('Error saving recipe:', error);
+            });
+    }
+
     return (
         <div>
-           
+
             <Wrapper>
                 <h3>Dinner Ideas</h3>
 
@@ -54,12 +79,12 @@ function Halal() {
                 }}>
                     {
                         halal.map((hit) => {
-                            let id = hit._links.self.href.slice(38,70);
+                            let id = hit._links.self.href.slice(38, 70);
                             return (
                                 <SplideSlide key={id}>
                                     <Card>
 
-                                        <h5>{hit.recipe.label}<SaveIcon></SaveIcon><Link to={'/recipe/' +id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
+                                        <h5>{hit.recipe.label}<SaveIcon onClick={() => saveRecipe(hit)}></SaveIcon><Link to={'/recipe/' + id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
                                         <img src={hit.recipe.images.REGULAR.url} alt={hit.recipe.label} />
                                         <Gradient></Gradient>
                                     </Card>
@@ -93,6 +118,7 @@ img {
   
 
 }
+
 
 h5{
   position:absolute;
@@ -130,6 +156,10 @@ a {
   a:hover {
     color: lightsteelblue;
     transition: 0.5s;
+  }
+  &:hover{
+    transform: scale(1.02);
+    transition: 0.5s
   }
 `;
 

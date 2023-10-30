@@ -6,29 +6,29 @@ import { NavLink } from 'react-router-dom';
 import Refresh from './Refresh';
 
 function Category() {
-    return (
-        <>
-            <List>
-                <SLink to={'/cuisine/Asian'}>
-                    <FaBowlRice />
-                    <h4>Asian</h4>
-                </SLink>
-                <SLink to={'/cuisine/American'}>
-                    <FaHamburger />
-                    <h4>American</h4>
-                </SLink>
-                <SLink to={'/cuisine/Middle Eastern'}>
-                    <GiDonerKebab />
-                    <h4>Middle Eastern</h4>
-                </SLink>
-                <SLink to={'/cuisine/South American'}>
-                    <GiTacos />
-                    <h4>South American</h4>
-                </SLink>
-            </List>
-            <Refresh />
-        </>
-    );
+  return (
+    <>
+      <List>
+        <SLink to={'/cuisine/Asian'}>
+          <FaBowlRice />
+          <h4>Asian</h4>
+        </SLink>
+        <SLink to={'/cuisine/American'}>
+          <FaHamburger />
+          <h4>American</h4>
+        </SLink>
+        <SLink to={'/cuisine/Middle Eastern'}>
+          <GiDonerKebab />
+          <h4>Middle Eastern</h4>
+        </SLink>
+        <SLink to={'/cuisine/South American'}>
+          <GiTacos />
+          <h4>South American</h4>
+        </SLink>
+      </List>
+      <Refresh />
+    </>
+  );
 }
 
 const List = styled.div`
@@ -67,7 +67,10 @@ const SLink = styled(NavLink)`
     h4 {
       color: white;
     }
+    transform: scale(1.01);
+  transition: 0.2s;
   }
+  
 `;
 
 export default Category;

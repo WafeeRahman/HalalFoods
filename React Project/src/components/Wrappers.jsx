@@ -61,7 +61,10 @@ a:hover {
     transition: 0.5s;
   }
 
-
+  &:hover{
+    transform: scale(1.02);
+    transition: 0.5s
+  }
 `;
 
 export const Gradient = styled.div`

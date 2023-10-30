@@ -21,9 +21,9 @@ function App() {
         }
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [name]);
 
-  
+
 
   const handleLogout = () => {
     // You can add logout logic here if needed
@@ -62,13 +62,14 @@ function App() {
       <BrowserRouter>
         <ContentContainer>
           <Nav>
-            <Logo to={'/'}><PiMosque/>HalalFoods</Logo>
+            <Logo to={'/'}><PiMosque style={{ transform: 'translateY(5px)' }} />HalalFoods
+            </Logo>
 
             <NavLinks>
               {name ? (
                 <>
                   <Link to={'/saved'}>Saved Recipes</Link>
-                  <Link to={'/logout'}onClick={handleLogout}>Logout</Link>
+                  <Link to={'/logout'} onClick={handleLogout}>Logout</Link>
                 </>
               ) : (
                 <>

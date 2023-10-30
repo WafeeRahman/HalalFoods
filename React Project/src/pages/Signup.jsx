@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -112,5 +113,7 @@ function Signup() {
     </Container>
   );
 }
+
+
 
 export default Signup;

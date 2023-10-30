@@ -6,6 +6,7 @@ import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { IoFlagOutline } from 'react-icons/io5';
+import axios from 'axios';
 function Popular() {
   // React State for Setting Popular Recipes Array
   const [popular, setPopular] = useState([]);
@@ -39,6 +40,31 @@ function Popular() {
 
   };
 
+  const saveRecipe = (hit) => {
+    // Prepare the data as an object
+    const recipeData = {
+      recipeName: hit.recipe.label,
+      image: hit.recipe.images.REGULAR.url,
+      url: hit.recipe.url
+    };
+  
+    // Make a POST request to your server to save the recipe using Axios
+    axios.post('http://localhost:3000/saved', { recipe: JSON.stringify(recipeData) })
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        if (data.success) {
+          alert('Recipe saved successfully');
+        } else {
+          alert('User Must Log In');
+        }
+      })
+      .catch((error) => {
+        alert('Error saving recipe:', error);
+      });
+  }
+  
+  
 
   return (
     //For Each Recipe in Popular Recipe, Place a Card with Details within a Wrapper Div
@@ -66,7 +92,7 @@ function Popular() {
 
                     <Card>
 
-                      <h5>{hit.recipe.label}<SaveIcon></SaveIcon><Link to={'/recipe/' + id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
+                      <h5>{hit.recipe.label}<SaveIcon onClick={() => saveRecipe(hit)}></SaveIcon><Link to={'/recipe/' + id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
                       <img src={hit.recipe.images.REGULAR.url} alt={hit.recipe.label} />
                       <Gradient></Gradient>
 
@@ -100,7 +126,7 @@ function Popular() {
 
               <Card>
 
-                <h5><Logo src="https://zabihahalal.com/wp-content/themes/zabiha-halal/images/images-logos-zh-logo.svg"/><Link to="https://zabihahalal.com/"><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
+                <h5><Logo src="https://zabihahalal.com/wp-content/themes/zabiha-halal/images/images-logos-zh-logo.svg" /><Link to="https://zabihahalal.com/"><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
                 <img src="https://zabihahalal.com/wp-content/uploads/2021/03/zabiha-halal-cajun-deli-slices.jpg" />
                 <Gradient></Gradient>
 
@@ -113,7 +139,7 @@ function Popular() {
 
               <Card>
 
-                <h5><Logo src="https://alsafahalal.com/wp-content/uploads/2018/07/head-logo-2.png"/><Link to="https://alsafahalal.com/"><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
+                <h5><Logo src="https://alsafahalal.com/wp-content/uploads/2018/07/head-logo-2.png" /><Link to="https://alsafahalal.com/"><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
                 <img src="https://www.shop-alsafahalal.com/cdn/shop/files/Alsafa_AngusBurger1_300x.jpg?v=1613740780" alt="" />
                 <Gradient></Gradient>
 
@@ -146,7 +172,7 @@ function Popular() {
 }
 
 const Logo = styled.img
-`
+  `
 min-width: 100%;
 min-height: 100%;
 object-fit: auto;

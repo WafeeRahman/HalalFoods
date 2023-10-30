@@ -12,6 +12,7 @@ import styled from "styled-components"
 import { Link } from "react-router-dom"
 import Login from "./Login"
 import Logout from "./Logout"
+import Saved from "./Saved"
 function Pages() {
   const location = useLocation();
 
@@ -28,6 +29,7 @@ function Pages() {
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
+        <Route path="/saved" element={<Saved />}></Route>
       </Routes>
     </AnimatePresence>
 
