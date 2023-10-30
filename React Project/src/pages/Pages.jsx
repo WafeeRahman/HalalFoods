@@ -11,16 +11,15 @@ import Category from "../components/Category"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 import Login from "./Login"
+import Logout from "./Logout"
 function Pages() {
   const location = useLocation();
+
+
+  
   return (
     <AnimatePresence mode="wait">
-      {(!location.pathname.includes('/signup') && !location.pathname.includes('/login')) && (
-        <>
-          <Search />
-          <Category />
-        </>
-      )}
+   
       <Routes Location={location} key={location.pathname}>
         <Route path="/" element={< Home />} />
         <Route path="/cuisine/:type" element={<Cuisine />} />
@@ -28,6 +27,7 @@ function Pages() {
         <Route path="recipe/:name" element={<Recipe />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/logout" element={<Logout />}></Route>
       </Routes>
     </AnimatePresence>
 

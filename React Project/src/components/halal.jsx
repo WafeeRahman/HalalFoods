@@ -5,7 +5,7 @@ import { Gradient, Wrapper } from './Wrappers.jsx'
 import styled from 'styled-components';
 import {FaMagnifyingGlass} from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
-import Refresh from "./Refresh.jsx"
+import { IoFlagOutline } from 'react-icons/io5'
 function Halal() {
 
     // React State for Setting Popular Recipes Array
@@ -59,7 +59,7 @@ function Halal() {
                                 <SplideSlide key={id}>
                                     <Card>
 
-                                        <h5>{hit.recipe.label}<Link to={'/recipe/' +id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
+                                        <h5>{hit.recipe.label}<SaveIcon></SaveIcon><Link to={'/recipe/' +id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
                                         <img src={hit.recipe.images.REGULAR.url} alt={hit.recipe.label} />
                                         <Gradient></Gradient>
                                     </Card>
@@ -130,6 +130,28 @@ a {
   a:hover {
     color: lightsteelblue;
     transition: 0.5s;
+  }
+`;
+
+
+const SaveIcon = styled(IoFlagOutline)`
+  position: absolute;
+  bottom: 0rem;
+  left: 0.8rem;
+  border-radius: 50%;
+  padding: 1rem;
+  font-size: 3rem; /* Larger size */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+  transform: scale(1); /* Initial size */
+  
+
+  &:hover {
+    transform: scale(1.2); /* Enlarge on hover */
+    color: #FFD700; /* Lighter shade of gold on hover */
   }
 `;
 

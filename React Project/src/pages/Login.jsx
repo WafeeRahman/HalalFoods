@@ -78,13 +78,15 @@ function Login() {
   const handleInput = (event) => {
     setValues(prev => ({ ...prev, [event.target.name]: [event.target.value] }))
   }
-
+  axios.defaults.withCredentials = true;
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     axios.post('http://localhost:3000/login', values)
       .then(res => {
         if(res.data.Login) {
+          
           navigate('/')
+          window.location.reload();
         }
         else {
           alert("Login Failed")

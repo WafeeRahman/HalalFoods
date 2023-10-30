@@ -5,6 +5,7 @@ import { Gradient, Card, Wrapper } from './Wrappers.jsx'
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { IoFlagOutline } from 'react-icons/io5';
 function Popular() {
   // React State for Setting Popular Recipes Array
   const [popular, setPopular] = useState([]);
@@ -65,7 +66,7 @@ function Popular() {
 
                     <Card>
 
-                      <h5>{hit.recipe.label}<Link to={'/recipe/' + id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
+                      <h5>{hit.recipe.label}<SaveIcon></SaveIcon><Link to={'/recipe/' + id}><FaMagnifyingGlass></FaMagnifyingGlass></Link></h5>
                       <img src={hit.recipe.images.REGULAR.url} alt={hit.recipe.label} />
                       <Gradient></Gradient>
 
@@ -151,5 +152,26 @@ min-height: 100%;
 object-fit: auto;
 transform: scale(0.6)
 `
+const SaveIcon = styled(IoFlagOutline)`
+  position: absolute;
+  bottom: 0rem;
+  left: 0.8rem;
+  border-radius: 50%;
+  padding: 1rem;
+  font-size: 3rem; /* Larger size */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+  transform: scale(1); /* Initial size */
+  
+
+  &:hover {
+    transform: scale(1.2); /* Enlarge on hover */
+    color: #FFD700; /* Lighter shade of gold on hover */
+  }
+`;
+
 
 export default Popular

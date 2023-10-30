@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-
-
+import Search from "../components/Search";
+import Category from "../components/Category";
 
 import React from 'react'
 
@@ -24,60 +24,66 @@ function Recipe() {
     }, [params.name]);
 
     return (
-        <DetailWrapper>
-            {details.recipe ? (
-                <>
-                    <div>
-                        <h2>{details.recipe.label}</h2>
-                        <Thumbnail src={details.recipe.images.REGULAR.url} alt="" />
+        <>
+            <Search />
+            <Category />
 
-                    </div>
-                    <Info>
+            <DetailWrapper>
+                {details.recipe ? (
+                    <>
 
-                        <Button className={activeTab == 'ingredients' ? 'active' : ''} onClick={() => setActiveTab('ingredients')}>Ingredients</Button>
-                        <Button className={activeTab == 'instructions' ? 'active' : ''} onClick={() => setActiveTab('instructions')}>Instructions</Button>
-                        
-                        {activeTab === 'ingredients' && (
-                            <div>
-                            <ol>
-                                {details.recipe.ingredientLines.map((text, idx) => {
-                                    return (
-                                        <li key={idx}>{text}</li>
-                                    );
-                                })}
-                            </ol>
-                            </div>
-                        )}
+                        <div>
+                            <h2>{details.recipe.label}</h2>
+                            <Thumbnail src={details.recipe.images.REGULAR.url} alt="" />
 
-                        {activeTab === 'instructions' && (
-                            <div>
-                                <BigGreenButton href={details.recipe.url}> Click Here to Go To Full Recipe</BigGreenButton>
-                            </div>
+                        </div>
+                        <Info>
 
-                        )}
+                            <Button className={activeTab == 'ingredients' ? 'active' : ''} onClick={() => setActiveTab('ingredients')}>Ingredients</Button>
+                            <Button className={activeTab == 'instructions' ? 'active' : ''} onClick={() => setActiveTab('instructions')}>Instructions</Button>
 
+                            {activeTab === 'ingredients' && (
+                                <div>
+                                    <ol>
+                                        {details.recipe.ingredientLines.map((text, idx) => {
+                                            return (
+                                                <li key={idx}>{text}</li>
+                                            );
+                                        })}
+                                    </ol>
+                                </div>
+                            )}
 
-                        {activeTab === 'ingredients' && (
-                            <div>
-                                {details.recipe.healthLabels.map((text, idx) => {
-                                    return (
-                                        <Tag key={idx}>{text}</Tag>
-                                    );
-                                })}
-                            </div>
-                        )}
+                            {activeTab === 'instructions' && (
+                                <div>
+                                    <BigGreenButton href={details.recipe.url}> Click Here to Go To Full Recipe</BigGreenButton>
+                                </div>
+
+                            )}
 
 
-
-                    </Info>
-                </>
-            ) : (
-                <div>Loading...</div>
-            )}
+                            {activeTab === 'ingredients' && (
+                                <div>
+                                    {details.recipe.healthLabels.map((text, idx) => {
+                                        return (
+                                            <Tag key={idx}>{text}</Tag>
+                                        );
+                                    })}
+                                </div>
+                            )}
 
 
 
-        </DetailWrapper>
+                        </Info>
+                    </>
+                ) : (
+                    <div>Loading...</div>
+                )}
+
+
+
+            </DetailWrapper>
+        </>
     );
 }
 
