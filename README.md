@@ -44,9 +44,7 @@
 <ul>
     <li><strong>ReactJS</strong>: The front-end of the application is developed using React for creating a user-friendly and responsive interface.</li>
     <li><strong>MySQL</strong>: The application utilizes a MySQL database to store user data and saved recipes securely.</li>
-    <li><strong>PHP</strong>: The server-side logic for user authentication and database interactions is implemented in PHP.</li>
     <li><strong>Edamam Recipe API</strong>: Recipe recommendations are fetched from the Edamam Recipe API to provide users with Halal recipe options.</li>
-    <li><strong>Microsoft Azure</strong>: The application is hosted on Microsoft Azure, a cloud computing platform, ensuring reliable access for users.</li>
 </ul>
 
 <h2>Prerequisites</h2>
