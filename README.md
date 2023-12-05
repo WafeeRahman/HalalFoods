@@ -110,14 +110,9 @@
 
 <h2>Deployment</h2>
 
-<p>HalalFoods is deployed on a virtual Linux machine using Microsoft Azure. Follow the deployment guidelines for hosting your application.</p>
-
-<h2>Contributing</h2>
-
-<p>Contributions to HalalFoods are welcome! Feel free to open issues, submit pull requests, or suggest new features and improvements.</p>
 
 
-<p>Enjoy using HalalFoods, and happy coding!</p>
+
 <p>So far, frontend functionality can be visited at https://halalfoods.onrender.com/ </p>
-
+<p>Enjoy using HalalFoods, and happy coding!</p>
 </body>
