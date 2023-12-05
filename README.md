@@ -116,9 +116,6 @@
 
 <p>Contributions to HalalFoods are welcome! Feel free to open issues, submit pull requests, or suggest new features and improvements.</p>
 
-<h2>License</h2>
-
-<p>This project is licensed under the <a href="LICENSE">MIT License</a>. You can use and modify the code for your own purposes, subject to the terms of the license.</p>
 
 <p>Enjoy using HalalFoods, and happy coding!</p>
 <p>So far, frontend functionality can be visited at https://halalfoods.onrender.com/ </p>
