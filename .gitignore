@@ -4,9 +4,12 @@ Backend/package.json
 React Project/package.json
 React Project/package-lock.json
 Backend/package-lock.json
-Backend/node_modules/yallist/README.md
-Backend/node_modules/yallist/LICENSE
-Backend/node_modules/.bin/mime
-Backend/node_modules/.bin/mime.cmd
+Backend/node_modules
 React Project/package-lock.json
 React Project/package.json
+React Project/package-lock.json
+./Backend/node_modules/yallist/yallist.js
+React Project/package-lock.json
+
+React Project/package.json
+React Project/package-lock.json
