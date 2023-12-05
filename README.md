@@ -1,6 +1,4 @@
-<head>
-    <title>HalalFoods - Web Application</title>
-</head>
+
 <body>
 
 <h1>HalalFoods - Web Application</h1>
