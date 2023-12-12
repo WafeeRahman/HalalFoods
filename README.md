@@ -15,8 +15,6 @@
     <li><a href="#authentication-and-authorization">Authentication and Authorization</a></li>
     <li><a href="#api-integration">API Integration</a></li>
     <li><a href="#deployment">Deployment</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
 </ul>
 
 <h2>Features</h2>
